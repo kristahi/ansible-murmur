@@ -2,14 +2,17 @@
 - name: Install the python-software-properties utility
   package: name=python-software-properties state=latest
 
-- name: Add the Mumble PPA
+- name: Add the PPA
+  when: ansible_distribution == 'Ubuntu'
   apt_repository: repo='ppa:mumble/release'
 
-- name: Install Murmur
-  apt: name=mumble-server
-  yum: name=mumble
-  dnf: name=mumble
-  pacman: name=mumble
+- name: Install Murmur (debian family)
+  when: ansible_os_family == 'Debian'
+  package: name=mumble-server state=latest
+
+- name: Install Murmur (not debian family)
+  when: ansible_os_family != 'Debian'
+  package: name=murmur state=latest
 
 - name: Generate the Murmur config file
   template: src=mumble-server.ini.j2

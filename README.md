@@ -1,9 +1,34 @@
 Murmur
 ======
 
-Ansible role that installs and configures Murmur on debian, ubuntu, fedora, rhel
-[Mumble voice chat software](http://mumble.sourceforge.net/). Thanks jlund for
-ubuntu work!
+Ansible role that installs and configures Murmur on debian, ubuntu, fedora, rhel,
+opensuse [Mumble voice chat software](http://mumble.sourceforge.net/).
+
+Installation
+------------
+
+Install with ``ansible-galaxy install narfman0.murmur``
+
+Development
+-----------
+
+This assumes your server is named "rasppi-murmur", please replace name as needed. Ensure you can ssh to user
+with sudo access already. Clone this repository, then create a hosts file with:
+
+    [mumble]
+    rasppi-murmur
+
+Create a main.yml file (playbook) with contents:
+
+    - hosts: mumble
+      roles:
+      - { role: ansible-murmur }
+      become: 'true'
+      become_method: 'sudo'
+
+Run playbook using users file with ``ansible-playbook -i hosts main.yml``
+
+Note out put and connect! Add your config to version control and rest on your laurels :)
 
 Role Variables
 --------------
