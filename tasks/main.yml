@@ -1,0 +1,20 @@
+---
+- name: Install the python-software-properties utility
+  package: name=python-software-properties state=latest
+
+- name: Add the Mumble PPA
+  apt_repository: repo='ppa:mumble/release'
+
+- name: Install Murmur
+  apt: name=mumble-server
+  yum: name=mumble
+  dnf: name=mumble
+  pacman: name=mumble
+
+- name: Generate the Murmur config file
+  template: src=mumble-server.ini.j2
+            dest=/etc/mumble-server.ini
+            owner=root
+            group=mumble-server
+            mode=640
+  notify: Restart Murmur
