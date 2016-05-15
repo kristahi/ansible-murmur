@@ -99,6 +99,12 @@ pidfile={{ murmur_pidfile }}
 # Welcome message sent to clients when they connect.
 welcometext="{{ murmur_welcometext }}"
 
+# Please see https://bugs.launchpad.net/ubuntu/+source/mumble/+bug/1346431 for
+# more information, this is a workaround for debian based systems where mumbles
+# init script isn't being read by systemd or upstart to depend on networking,
+# thus port binds fail. This is a sneaky way around it.
+host=::
+
 # Port to bind TCP and UDP sockets to.
 port={{ murmur_port }}
 
