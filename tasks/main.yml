@@ -1,7 +1,7 @@
 ---
 - name: Install Murmur (debian family)
   when: ansible_os_family == 'Debian'
-  package: name=mumble-server state=latest
+  apt: name=mumble-server state=latest
 
 - name: Install Murmur (not debian family)
   when: ansible_os_family != 'Debian'
