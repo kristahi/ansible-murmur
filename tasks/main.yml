@@ -1,11 +1,4 @@
 ---
-- name: Install the python-software-properties utility
-  package: name=python-software-properties state=latest
-
-- name: Add the PPA
-  when: ansible_distribution == 'Ubuntu'
-  apt_repository: repo='ppa:mumble/release'
-
 - name: Install Murmur (debian family)
   when: ansible_os_family == 'Debian'
   package: name=mumble-server state=latest
